@@ -1,4 +1,4 @@
-package main
+package xinchuang_build_lint
 
 import (
 	"bufio"
@@ -98,22 +98,21 @@ func ReadAndSubFileLine(path string) {
 	fmt.Println()
 }
 
-func main() {
-
-	root := Init()
-
-	/* 用两个channel + goroutine 的方式并发，保证在较大数据量情况下可以运行 */
-	fileChan := make(chan string)
-	isdoneChan := make(chan bool)
-
-	/* 用 goruntine 进行文件匹配 */
-	go func() {
-		MatchFile(fileChan, isdoneChan)
-	}()
-
-	/* 并发进行 root 下的遍历，使用匿名函数把 fileChan 内嵌进去 */
-	TraverseDir(root, fileChan)
-
-	close(fileChan)
-	<-isdoneChan
-}
+//func main() {
+//
+//	root := Init()
+//
+//	/* 用两个channel + goroutine 的方式并发，保证在较大数据量情况下可以运行 */
+//	fileChan := make(chan string)
+//	isdoneChan := make(chan bool)
+//
+//	/* 用 goruntine 进行文件匹配 */
+//	go func() {
+//		MatchFile(fileChan, isdoneChan)
+//	}()
+//
+//	/* 并发进行 root 下的遍历，使用匿名函数把 fileChan 内嵌进去 */
+//	TraverseDir(root, fileChan)
+//
+//	close(fileChan)
+//}
