@@ -1,0 +1,39 @@
+# 每个table编写一组匹配规则，每个规则都有一个pattern和一个action
+[[filematch]]
+pattern = "Makefile"
+action = "output"
+
+[[filematch]]
+pattern = "CMakeLists.txt"
+action = "output"
+
+[[filematch]]
+pattern = "BUILD"
+action = "output"
+
+[[filematch]]
+pattern = ".bazel"
+action = "output"
+
+[[filematch]]
+pattern = "foo"
+action = "nothing"
+
+# 每个table编写一组参数的lint规则，每个规则都有一个操作类型，并制定了替换方案（如果有的话）
+[[arglint]]
+x86 = "-march=i686"
+armv8 = "-march=armv8-a"
+action = "replace"
+
+[[arglint]]
+x86 = "-m32"
+armv8 = "-mabi=lp64"
+action = "replace"
+
+[[arglint]]
+x86 = "fsigned-char"
+action = "notice"
+
+[[arglint]]
+x86 = "-fPIC"
+action = "notice"
