@@ -11,14 +11,14 @@ import (
 type MakeFileName string
 
 /* 字符串数组存储Makefile的名字，可以自行添加 */
-var MakeFileNames = []MakeFileName{"Makefile", "makefile", "CMakeList", "BUILD", ".bazelrc"}
+var MakeFileNames = []MakeFileName{"Makefile", "makefile", "CMakeLists.txt", "BUILD", ".bazelrc"}
 
 // 定义替换规则
 var rules = map[string]string{
 	"-march=i686": "-march=armv8.2-a",
 	"-march":      "-march=armv8.2-a",
 	"-m32":        "-mabi=lp64",
-	// 这里可以添加更多的替换规则
+	// 这里可以添加更多的x替换规则
 }
 
 /* 以程序当前所在路径为源路径开始遍历 */

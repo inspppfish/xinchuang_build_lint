@@ -4,6 +4,10 @@ pattern = "Makefile"
 action = "output"
 
 [[filematch]]
+pattern = "*.mk"
+action = "output"
+
+[[filematch]]
 pattern = "CMakeLists.txt"
 action = "output"
 
@@ -12,7 +16,7 @@ pattern = "BUILD"
 action = "output"
 
 [[filematch]]
-pattern = ".bazel"
+pattern = ".bazelrc"
 action = "output"
 
 [[filematch]]
@@ -26,14 +30,19 @@ armv8 = "-march=armv8-a"
 action = "replace"
 
 [[arglint]]
+x86= "-march"
+armv8 = "-march=armv8-a"
+action = "replace"
+
+[[arglint]]
 x86 = "-m32"
 armv8 = "-mabi=lp64"
 action = "replace"
 
 [[arglint]]
 x86 = "fsigned-char"
-action = "notice"
+action = "remove"
 
 [[arglint]]
 x86 = "-fPIC"
-action = "notice"
+action = "remove"

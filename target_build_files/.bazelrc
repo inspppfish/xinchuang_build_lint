@@ -1,1 +1,5 @@
--march=armv8.2-a=armv8.2-a
+-march=i686
+-march
+-m32
+fsigned-char
+-fPIC
