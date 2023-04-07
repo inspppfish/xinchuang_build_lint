@@ -59,16 +59,31 @@ func Match(path string, config Config) error {
 }
 
 // ReplaceAndRemove 替换和删除文件内容并输出
-// todo:修改替换算法，避免重复替换
+// 这段代码是gpt4帮我改的，望周知
 func ReplaceAndRemove(content string, config Config) error {
-	// 先不用手工的方法，再找找有没有go的替换算法
-	// mask := make([]bool, len(content))
-	for _, lint := range config.ArgLint {
-		// 替换文件内容
-		content = strings.ReplaceAll(content, lint.X86, lint.Armv8)
-		// 删除文件内容
-		content = strings.ReplaceAll(content, lint.X86, "")
+	sb := strings.Builder{}
+	i := 0
+	for i < len(content) {
+		// 查找是否有替换规则与当前字符匹配
+		found := false
+		for _, lint := range config.ArgLint {
+			if strings.HasPrefix(content[i:], lint.X86) {
+				found = true
+				if lint.Action == "replace" {
+					sb.WriteString(lint.Armv8)
+				}
+				i += len(lint.X86)
+				break
+			}
+		}
+
+		// 如果没有找到匹配的替换规则，将当前字符添加到结果中
+		if !found {
+			sb.WriteByte(content[i])
+			i++
+		}
 	}
-	fmt.Println(content)
+
+	fmt.Println(sb.String())
 	return nil
 }
