@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/BurntSushi/toml"
 	"log"
 	"os"
@@ -30,8 +31,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = xinchuang_build_lint.ReplaceAndRemove(string(content), config)
-	if err != nil {
-		panic(err)
-	}
+	result := xinchuang_build_lint.ReplaceAndRemove(string(content), config)
+	fmt.Println(result)
 }
