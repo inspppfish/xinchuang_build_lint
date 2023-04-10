@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// 命令行参数解析
-	absPath, cfgFile := xinchuang_build_lint.ArgParse()
+	absPath, _, cfgFile := xinchuang_build_lint.ArgParse()
 	log.Println("absPath:", absPath)
 	log.Println("cfgFile:", cfgFile)
 
@@ -21,7 +21,7 @@ func main() {
 		panic(err)
 	}
 
-	// 先从短到长排序
+	// 先从长到短排序
 	sort.SliceStable(config.ArgLint, func(i, j int) bool {
 		return len(config.ArgLint[i].X86) > len(config.ArgLint[j].X86)
 	})

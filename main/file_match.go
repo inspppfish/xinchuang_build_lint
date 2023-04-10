@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/BurntSushi/toml"
 	"log"
 	"xinchuang_build_lint"
@@ -9,9 +10,10 @@ import (
 func main() {
 
 	// 命令行参数解析
-	absPath, cfgFile := xinchuang_build_lint.ArgParse()
+	absPath, recursion, cfgFile := xinchuang_build_lint.ArgParse()
 	log.Println("absPath:", absPath)
 	log.Println("cfgFile:", cfgFile)
+	log.Println("recursion:", recursion)
 
 	// 解析toml配置文件
 	var config xinchuang_build_lint.Config
@@ -19,9 +21,11 @@ func main() {
 		panic(err)
 	}
 
-	err := xinchuang_build_lint.Match(absPath, config)
+	result, err := xinchuang_build_lint.Match(absPath, recursion, config)
 	if err != nil {
-		return
+		panic(err)
 	}
-
+	for _, path := range result {
+		fmt.Println(path)
+	}
 }
