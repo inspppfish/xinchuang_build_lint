@@ -1,0 +1,5 @@
+-march=i686
+-march
+-m32
+fsigned-char
+-fPIC
